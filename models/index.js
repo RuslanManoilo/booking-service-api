@@ -1,5 +1,7 @@
 import { Sequelize } from "sequelize";
 import UserModel from './User.js';
+import CampingModel from './Camping.js'
+import OrderModel from './Order.js'
 
 export const sequelize = new Sequelize("postgres", "postgres", "rootroot", {
   host: "localhost",
@@ -8,11 +10,14 @@ export const sequelize = new Sequelize("postgres", "postgres", "rootroot", {
   logging: false, // Щоб включити логування SQL-запитів, встановити на true
 });
 
-// Підключення моделі User та передача об'єкта sequelize
+// Підключення моделі та передача об'єкта sequelize
 const User = UserModel(sequelize);
+const Camping = CampingModel(sequelize);
+const Order = OrderModel(sequelize);
 
 // Створення таблиці в базі даних (якщо вона ще не існує)
 User.sync();
+Camping.sync();
+Order.sync();
 
-// Експорт моделі для використання в інших файлових системах
-export default User;
+export { User, Camping, Order };

@@ -3,6 +3,8 @@ import logger from "morgan";
 import cors from "cors";
 
 import userRouter from "./routes/user-router.js";
+import campingRouter from "./routes/camping-router.js";
+import orderRouter from "./routes/order-router.js";
 
 const app = express();
 
@@ -13,6 +15,8 @@ app.use(cors());
 app.use(express.json());
 
 app.use('/api/users', userRouter);
+app.use('/api/campings', campingRouter);
+app.use('/api/orders', orderRouter);
 
 app.use((req, res) => {
   res.status(404).json({ message: "Not found" });
