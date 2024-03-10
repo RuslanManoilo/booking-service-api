@@ -1,6 +1,8 @@
 import express from "express";
 import logger from "morgan";
 import cors from "cors";
+import swaggerUi from 'swagger-ui-express';
+import { specs } from './swagger/swagger-options.js';
 
 import userRouter from "./routes/user-router.js";
 import campingRouter from "./routes/camping-router.js";
@@ -17,6 +19,8 @@ app.use(express.json());
 app.use('/api/users', userRouter);
 app.use('/api/campings', campingRouter);
 app.use('/api/orders', orderRouter);
+
+app.use("/swagger/api-docs", swaggerUi.serve, swaggerUi.setup(specs));
 
 app.use((req, res) => {
   res.status(404).json({ message: "Not found" });
